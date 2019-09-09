@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
-  namespace 'admin'do
-    devise_for :staffs, controllers: { sessions: "staffs/sessions" }
+  # devise_for :staffs, path: 'staffs', controllers: { sessions: "staffs/sessions" }
+  # devise_for :clients, path: 'clients', controllers: { sessions: "clients/sessions" }
+
+  scope :staffs do
+    get 'sign_in', to: 'staffs/sessions#new'
+    delete 'sign_out', to: 'staffs/sessions#destroy'
+    root to: 'staffs/landing#index'
   end
 
-  namespace 'clients' do
-    devise_for :clients, controllers: { sessions: "clients/sessions" }
+  scope :clients do
+    get 'sign_in', to: 'clients/sessions#new'
+    delete 'sign_out', to: 'clients/sessions#destroy'
+    root to: 'clients/landing#index'
   end
-
-  root to: 'landing#index'
 end

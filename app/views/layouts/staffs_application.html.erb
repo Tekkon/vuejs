@@ -6,29 +6,15 @@
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
 
-  <ul>
-    <% if staff_signed_in? %>
-      <li>
-        <%= link_to 'Staff Sign out', destroy_staff_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <% unless current_page?(new_staff_session_path) %>
-        <li>
-          <%= link_to 'Staff Sign in', new_staff_session_path %>
-        </li>
-      <% end %>
-
-      <% unless current_page?(new_staff_registration_path) %>
-        <li>
-          <%= link_to 'Staff Sign up', new_staff_registration_path %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-
-  <% if current_staff %>
+  <% if staff_signed_in? %>
     <%= stylesheet_pack_tag 'staffs_application', media: 'all' %>
     <%= javascript_pack_tag 'staffs_application' %>
+
+    <ul>
+      <li>
+        <%= link_to 'Staff Sign out', sign_out_path, method: :delete %>
+      </li>
+    </ul>
   <% end %>
 </head>
 

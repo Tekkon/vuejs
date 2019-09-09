@@ -6,29 +6,15 @@
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
 
-  <ul>
-    <% if client_signed_in? %>
-      <li>
-        <%= link_to 'Client Sign out', destroy_client_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <% unless current_page?(new_client_session_path) %>
-        <li>
-          <%= link_to 'Client Sign in', new_client_session_path %>
-        </li>
-      <% end %>
-
-      <% unless current_page?(new_client_registration_path) %>
-        <li>
-          <%= link_to 'Client Sign up', new_client_registration_path %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-
-  <% if current_client %>
+  <% if client_signed_in? %>
     <%= stylesheet_pack_tag 'clients_application', media: 'all' %>
     <%= javascript_pack_tag 'clients_application' %>
+
+    <ul>
+      <li>
+        <%= link_to 'Client Sign out', sign_out_path, method: :delete %>
+      </li>
+    </ul>
   <% end %>
 </head>
 
