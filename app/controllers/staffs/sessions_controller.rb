@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Staffs::SessionsController < Devise::SessionsController
+  layout 'staffs_application'
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
