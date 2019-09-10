@@ -1,6 +1,4 @@
-class Clients::LandingController < ApplicationController
-  layout 'clients_application'
-
+class Clients::LandingController < Clients::BaseController
   def index
 
   end

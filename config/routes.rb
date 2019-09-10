@@ -1,16 +1,12 @@
 Rails.application.routes.draw do
-  # devise_for :staffs, path: 'staffs', controllers: { sessions: "staffs/sessions" }
-  # devise_for :clients, path: 'clients', controllers: { sessions: "clients/sessions" }
+  devise_for :staffs, :controllers => { :sessions => "staffs/sessions" }, skip: [:registrations]
+  devise_for :clients, :controllers => { :sessions => "clients/sessions" }, skip: [:registrations]
 
   scope :staffs do
-    get 'sign_in', to: 'staffs/sessions#new'
-    delete 'sign_out', to: 'staffs/sessions#destroy'
-    root to: 'staffs/landing#index'
+    root to: 'staffs/landing#index', as: :staffs_root
   end
 
   scope :clients do
-    get 'sign_in', to: 'clients/sessions#new'
-    delete 'sign_out', to: 'clients/sessions#destroy'
-    root to: 'clients/landing#index'
+    root to: 'clients/landing#index', as: :clients_root
   end
 end
