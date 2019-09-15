@@ -9,9 +9,13 @@ class Staffs::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    if ApiTokenService.call.present?
+      warden.authenticate!(:staff_api_token)
+    end
+
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy

@@ -9,9 +9,13 @@ class Clients::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    if ApiTokenService.call.present?
+      warden.authenticate!(:client_api_token)
+    end
+
+    super
+  end
 
   # DELETE /resource/sign_out
   # def destroy
@@ -24,7 +28,6 @@ class Clients::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  #
 
   protected
 
