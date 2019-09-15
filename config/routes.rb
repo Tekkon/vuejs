@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   scope :clients do
     root to: 'clients/landing#index', as: :clients_root
+    get 'list', to: 'clients/landing#list', as: :clients_list
   end
 end
