@@ -1,12 +1,9 @@
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.esm'
 import App from '../staffs_app.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-    const el = document.body.appendChild(document.createElement('application'))
-    const app = new Vue({
-        el,
+    new Vue({
+        el: '#app',
         render: h => h(App)
     })
-
-    console.log(app)
 })

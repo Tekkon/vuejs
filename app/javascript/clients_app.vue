@@ -7,48 +7,37 @@
       <p>Ошибка</p>
     </div>
     <div v-else>
-      <input v-model="title">
-      <button @click="addTodo">add todo</button>
-      <todo v-for="item in list" :title="item.title" :key="item.id" @remove-todo="remove"></todo>
+      <nav-bar :email="client.email"></nav-bar>
     </div>
   </div>
 </template>
 
 <script>
-  import Todo from 'clients_app/components/todo.vue'
-  import api from 'clients_app/api'
+  import NavBar from 'clients_app/components/navbar.vue'
+  import api from 'api'
 
   export default {
     data () {
       return {
         loading: true,
         error: false,
-        title: '',
-        list: []
+        client: {},
+        title: ''
       }
     },
     created() {
-      this.getList();
+      this.getCurrentClient();
     },
     methods: {
-      addTodo() {
-        this.list.push({ title: this.title })
-        this.title = ''
-      },
-      remove(title) {
-        this.list = this.list.filter((item) => {
-          if (item.title !== title) return item
-        })
-      },
-      getList() {
-        api.getList()
-          .then((response) => this.list = response.data)
+      getCurrentClient() {
+        api.getCurrentClient()
+          .then((response) => this.client = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       }
     },
     components: {
-      Todo
+      NavBar
     }
   }
 </script>

@@ -1,20 +1,11 @@
 class Clients::LandingController < Clients::BaseController
-  before_action :authenticate_client!, except: :list
+  before_action :authenticate_client!
 
   def index
 
   end
 
-  def list
-    @list = [
-      {
-        id: 1,
-        title: 'First task'
-      },
-      {
-        id: 2,
-        title: 'Second task'
-      }
-    ]
+  def current
+    @client = current_client
   end
 end

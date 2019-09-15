@@ -4,10 +4,11 @@ Rails.application.routes.draw do
 
   scope :staffs do
     root to: 'staffs/landing#index', as: :staffs_root
+    get 'current', to: 'staffs/landing#current', as: :staffs_current
   end
 
   scope :clients do
     root to: 'clients/landing#index', as: :clients_root
-    get 'list', to: 'clients/landing#list', as: :clients_list
+    get 'current', to: 'clients/landing#current', as: :clients_current
   end
 end
