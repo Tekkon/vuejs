@@ -1,13 +1,24 @@
 <template>
   <div>
-    <ul v-for="(client, index) in clients">
-      <li>{{ client.name }}, {{ client.email }}, {{ client.phone }}</li>
-    </ul>
-    <form name="client_form" onsubmit="return validateForm()">
-      <input name="name" type="text" v-model="form.name" required>
-      <input name="phone" type="text" v-model="form.phone" required>
-      <input name="email" type="text" v-model="form.email" required>
-      <input type="submit" value="Добавить клиента">
+    <div v-for="client in clients" v-bind:key="client.id">
+      <p>{{ client.name }}, {{ client.email }}, {{ client.phone }}</p>
+    </div>
+
+    <form name="client_form">
+      <label for="name_input">Имя: </label>
+      <input id="name_input" name="name" type="text" v-model="form.name" @keyup="validateName" required>
+      <label style="color:red;">{{ name_validation_error }}</label>
+      <br/>
+
+      <label for="name_input">Email: </label>
+      <input id="email_input" name="email" type="text" v-model="form.email" @keyup="validateEmail" required>
+      <label style="color:red;">{{ email_validation_error }}</label><br/>
+
+      <label for="phone_input">Телефон: </label>
+      <input id="phone_input" name="phone" type="text" v-model="form.phone" @keyup="validatePhone" required>
+      <label style="color:red;">{{ phone_validation_error }}</label><br/>
+
+      <input type="button" value="Добавить клиента" @click="$emit('form-submitted', form)">
     </form>
   </div>
 </template>
@@ -15,33 +26,40 @@
 <script>
   export default {
     props: ['clients'],
-    data: {
-      form: {
-        name: '',
-        phone: '',
-        email: ''
+    data() {
+      return {
+        form: {
+          name: '',
+          phone: '',
+          email: ''
+        },
+        name_validation_error: '',
+        email_validation_error: '',
+        phone_validation_error: ''
       }
     },
     methods: {
-      validateForm() {
-        var name = document.forms["client_form"]["name"].value;
-        if (name == "") {
-          alert("Name must be filled out");
-          return false;
+      validateName() {
+        if (this.form.name == '') {
+          this.name_validation_error = "Name must be filled out";
+        } else {
+          this.name_validation_error = '';
         }
-
-        var phone = document.forms["client_form"]["phone"].value;
-        var pattern = /^\d+$/;
-        if (!pattern.test(phone)) {
-          alert("Phone must consist of numers only");
-          return false;
-        }
-
-        var email = document.forms["client_form"]["email"].value;
+      },
+      validateEmail() {
         var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!pattern.test(email)) {
-          alert("Email is invalid");
-          return false;
+        if (!pattern.test(this.form.email)) {
+          this.email_validation_error = "Email format is invalid";
+        } else {
+          this.email_validation_error = '';
+        }
+      },
+      validatePhone() {
+        var pattern = /^\d+$/;
+        if (!pattern.test(this.form.phone)) {
+          this.phone_validation_error = "Phone should contain numbers only";
+        } else {
+          this.phone_validation_error = '';
         }
       }
     }

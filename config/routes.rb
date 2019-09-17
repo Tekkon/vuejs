@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   scope :staffs do
     root to: 'staffs/landing#index', as: :staffs_root
     get 'current', to: 'staffs/landing#current', as: :staffs_current
-    resources :clients
+    get 'clients', to: 'staffs/clients#index'
+    post 'clients', to: 'staffs/clients#create'
   end
 
   scope :clients do

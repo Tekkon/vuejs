@@ -6,5 +6,9 @@ export default {
   },
   getClients() {
     return axios.get('/staffs/clients');
+  },
+  createClient(data, staff) {
+    axios.defaults.headers.common['HTTP_AUTHORIZATION'] = staff.api_token
+    return axios.post('/staffs/clients', data)
   }
 }
