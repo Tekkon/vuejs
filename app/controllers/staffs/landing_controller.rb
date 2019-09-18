@@ -4,8 +4,4 @@ class Staffs::LandingController < Staffs::BaseController
   def index
 
   end
-
-  def current
-    @staff = current_staff
-  end
 end

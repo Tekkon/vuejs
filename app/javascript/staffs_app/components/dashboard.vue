@@ -18,6 +18,9 @@
       <input id="phone_input" name="phone" type="text" v-model="form.phone" @keyup="validatePhone" required>
       <label style="color:red;">{{ phone_validation_error }}</label><br/>
 
+      <label for="password_input">Пароль: </label>
+      <input id="password_input" name="password" type="password" v-model="form.password" required><br/>
+
       <input type="button" value="Добавить клиента" @click="$emit('form-submitted', form)">
     </form>
   </div>
@@ -31,7 +34,8 @@
         form: {
           name: '',
           phone: '',
-          email: ''
+          email: '',
+          password: ''
         },
         name_validation_error: '',
         email_validation_error: '',

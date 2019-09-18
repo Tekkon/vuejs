@@ -1,16 +1,12 @@
 <template lang="pug">
-  <div v-if="loading">
-    <p>Загрузка...</p>
-  </div>
-  <div v-else>
-    <div v-if="error">
-      <p>Ошибка</p>
-    </div>
-    <div v-else>
-      <nav-bar :email="staff.email"></nav-bar>
-      <dashboard :clients="clients" @form-submitted="createClient"></dashboard>
-    </div>
-  </div>
+  div(v-if="loading")
+    p Загрузка...
+  div(v-else)
+    div(v-if="error")
+      p Ошибка
+    div(v-else)
+      nav-bar(:email="staff.email" @sign-out="signOut")
+      dashboard(:clients="clients" @form-submitted="createClient")
 </template>
 
 <script>
@@ -50,6 +46,12 @@
           .then((response) => this.clients.push(response.data))
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
+      },
+      signOut() {
+        api.signOut()
+          .then()
+          .catch(() => this.error = true)
+          .finally(() => this.loading = false)
       }
     },
     components: {
@@ -59,7 +61,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   p {
     font-size: 1em;
   }

@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue.esm'
+import Vue from 'vue'
 import App from '../staffs_app.vue'
 
 document.addEventListener('DOMContentLoaded', () => {

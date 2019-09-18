@@ -2,7 +2,7 @@
   <div>
     <img src="../../../assets/images/logo.png" width="20px;" />
     <span>{{ email }}</span>
-    <button @click="signOut">Выход</button>
+    <button @click="$emit('sign-out')">Выход</button>
   </div>
 </template>
 
@@ -10,9 +10,6 @@
   export default {
     props: ['email'],
     methods: {
-      signOut() {
-
-      }
     }
   }
 </script>

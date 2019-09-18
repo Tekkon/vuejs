@@ -4,8 +4,4 @@ class Clients::LandingController < Clients::BaseController
   def index
 
   end
-
-  def current
-    @client = current_client
-  end
 end
