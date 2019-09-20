@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    img(src="../../../assets/images/logo.png" width="20px;")
+    img(:src="require('images/logo.png')" width="20px;")
     span {{ email }}
     button(@click="signOut")
 </template>
