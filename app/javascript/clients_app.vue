@@ -10,7 +10,6 @@
 
 <script>
   import NavBar from 'clients_app/components/navbar.vue'
-  import { api } from 'api/clients'
 
   export default {
     data () {
@@ -26,7 +25,7 @@
     },
     methods: {
       getCurrentClient() {
-        api.clients.current()
+        this.$api.clients.current()
           .then((response) => this.client = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)

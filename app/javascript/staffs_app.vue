@@ -12,7 +12,6 @@
 <script>
   import NavBar from 'staffs_app/components/navbar.vue'
   import Dashboard from 'staffs_app/components/dashboard.vue'
-  import { api } from 'api/staffs'
 
   export default {
     data () {
@@ -30,25 +29,25 @@
     },
     methods: {
       getCurrentStaff() {
-        api.staffs.current()
+        this.$api.staffs.current()
           .then((response) => this.staff = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
       getClients() {
-        api.clients.index()
+        this.$api.clients.index()
           .then((response) => this.clients = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
       createClient(data) {
-        api.clients.create(data, this.staff)
+        this.$api.clients.create(data, this.staff)
           .then((response) => this.clients.push(response.data))
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
       signOut() {
-        api.signOut()
+        this.$api.signOut()
           .then()
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
