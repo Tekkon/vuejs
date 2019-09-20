@@ -47,7 +47,7 @@
           .finally(() => this.loading = false)
       },
       signOut() {
-        this.$api.signOut()
+        this.$api.staffs.signOut()
           .then()
           .catch(() => this.error = true)
           .finally(() => this.loading = false)

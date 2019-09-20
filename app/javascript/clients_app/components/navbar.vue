@@ -2,16 +2,13 @@
   div
     img(:src="require('images/logo.png')" width="20px;")
     span {{ email }}
-    button(@click="signOut")
+    a(href="/clients/sign_out") Выход
 </template>
 
 <script>
   export default {
     props: ['email'],
     methods: {
-      signOut() {
-
-      }
     }
   }
 </script>

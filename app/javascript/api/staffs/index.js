@@ -11,9 +11,9 @@ const adapter = axios.create({
 })
 
 const api = {
-  sign_out: () => adapter.get('sign_out'),
   staffs: {
-    current: () => adapter.get('current')
+    current: () => adapter.get('current'),
+    signOut: () => adapter.delete('sign_out')
   },
   clients: {
     index: () => adapter.get('clients'),

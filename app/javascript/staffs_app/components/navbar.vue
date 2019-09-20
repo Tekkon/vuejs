@@ -2,7 +2,7 @@
   div
     img(:src="require('images/logo.png')" width="20px;")
     span {{ email }}
-    button(@click="$emit('sign-out')") Выход
+    a(href="/staffs/sign_out") Выход
 </template>
 
 <script>
