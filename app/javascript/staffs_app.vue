@@ -10,8 +10,8 @@
 </template>
 
 <script>
-  import NavBar from 'staffs_app/components/navbar.vue'
-  import Dashboard from 'staffs_app/components/dashboard.vue'
+  import NavBar from 'staff_components/navbar.vue'
+  import Dashboard from 'staff_components/dashboard.vue'
 
   export default {
     data () {
