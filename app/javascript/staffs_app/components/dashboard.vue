@@ -1,29 +1,29 @@
-<template>
-  <div>
-    <div v-for="client in clients" v-bind:key="client.id">
-      <p>{{ client.name }}, {{ client.email }}, {{ client.phone }}</p>
-    </div>
+<template lang="pug">
+  div
+    div(v-for="client in clients" v-bind:key="client.id")
+      p {{ client.name }}, {{ client.email }}, {{ client.phone }}
 
-    <form name="client_form">
-      <label for="name_input">Имя: </label>
-      <input id="name_input" name="name" type="text" v-model="form.name" @keyup="validateName" required>
-      <label style="color:red;">{{ name_validation_error }}</label>
-      <br/>
+    form(name="client_form")
+      label(for="name_input") Имя:
+      input(id="name_input" name="name" type="text" v-model="form.name" @keyup="validateName" required)
+      label(style="color:red;") {{ name_validation_error }}
+      br
 
-      <label for="name_input">Email: </label>
-      <input id="email_input" name="email" type="text" v-model="form.email" @keyup="validateEmail" required>
-      <label style="color:red;">{{ email_validation_error }}</label><br/>
+      label(for="name_input") Email:
+      input(id="email_input" name="email" type="text" v-model="form.email" @keyup="validateEmail" required)
+      label(style="color:red;") {{ email_validation_error }}
+      br
 
-      <label for="phone_input">Телефон: </label>
-      <input id="phone_input" name="phone" type="text" v-model="form.phone" @keyup="validatePhone" required>
-      <label style="color:red;">{{ phone_validation_error }}</label><br/>
+      label(for="phone_input") Телефон:
+      input(id="phone_input" name="phone" type="text" v-model="form.phone" @keyup="validatePhone" required)
+      label(style="color:red;") {{ phone_validation_error }}
+      br
 
-      <label for="password_input">Пароль: </label>
-      <input id="password_input" name="password" type="password" v-model="form.password" required><br/>
+      label(for="password_input") Пароль:
+      input(id="password_input" name="password" type="password" v-model="form.password" required)
+      br
 
-      <input type="button" value="Добавить клиента" @click="$emit('form-submitted', form)">
-    </form>
-  </div>
+      input(type="button" value="Добавить клиента" @click="$emit('form-submitted', form)")
 </template>
 
 <script>

@@ -12,7 +12,7 @@
 <script>
   import NavBar from 'staffs_app/components/navbar.vue'
   import Dashboard from 'staffs_app/components/dashboard.vue'
-  import api from 'api/staffs'
+  import { api } from 'api/staffs'
 
   export default {
     data () {
@@ -30,19 +30,19 @@
     },
     methods: {
       getCurrentStaff() {
-        api.getCurrentStaff()
+        api.staffs.current()
           .then((response) => this.staff = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
       getClients() {
-        api.getClients()
+        api.clients.index()
           .then((response) => this.clients = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
       createClient(data) {
-        api.createClient(data, this.staff)
+        api.clients.create(data, this.staff)
           .then((response) => this.clients.push(response.data))
           .catch(() => this.error = true)
           .finally(() => this.loading = false)

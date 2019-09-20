@@ -1,9 +1,8 @@
-<template>
-  <div>
-    <img src="../../../assets/images/logo.png" width="20px;" />
-    <span>{{ email }}</span>
-    <button @click="signOut">Выход</button>
-  </div>
+<template lang="pug">
+  div
+    img(src="../../../assets/images/logo.png" width="20px;")
+    span {{ email }}
+    button(@click="signOut")
 </template>
 
 <script>

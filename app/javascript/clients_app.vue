@@ -1,20 +1,16 @@
-<template>
-  <div v-if="loading">
-    <p>Загрузка...</p>
-  </div>
-  <div v-else>
-    <div v-if="error">
-      <p>Ошибка</p>
-    </div>
-    <div v-else>
-      <nav-bar :email="client.email"></nav-bar>
-    </div>
-  </div>
+<template lang="pug">
+  div(v-if="loading")
+    p Загрузка...
+  div(v-else)
+    div(v-if="error")
+      p Ошибка
+    div(v-else)
+      nav-bar(:email="client.email")
 </template>
 
 <script>
   import NavBar from 'clients_app/components/navbar.vue'
-  import api from 'api/clients'
+  import { api } from 'api/clients'
 
   export default {
     data () {
@@ -30,7 +26,7 @@
     },
     methods: {
       getCurrentClient() {
-        api.getCurrentClient()
+        api.clients.current()
           .then((response) => this.client = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
@@ -42,9 +38,8 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   p {
     font-size: 1em;
   }
 </style>
-
