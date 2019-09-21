@@ -5,14 +5,13 @@
   <%= csrf_meta_tags %>
 
   <%= stylesheet_link_tag 'application', media: 'all' %>
+</head>
 
+<body>
+  <%= yield %>
   <% if staff_signed_in? %>
     <%= stylesheet_pack_tag 'staffs_application', media: 'all' %>
     <%= javascript_pack_tag 'staffs_application' %>
   <% end %>
-</head>
-
-<body>
-<%= yield %>
 </body>
 </html>
