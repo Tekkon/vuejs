@@ -5,25 +5,25 @@
 
     form(name="client_form")
       label(for="name_input") Имя:
-      input(id="name_input" name="name" type="text" v-model="form.name" @keyup="validateName" required)
+      input(id="name_input" name="name" type="text" v-model="client.name" @keyup="validateName" required)
       label(style="color:red;") {{ name_validation_error }}
       br
 
       label(for="name_input") Email:
-      input(id="email_input" name="email" type="text" v-model="form.email" @keyup="validateEmail" required)
+      input(id="email_input" name="email" type="text" v-model="client.email" @keyup="validateEmail" required)
       label(style="color:red;") {{ email_validation_error }}
       br
 
       label(for="phone_input") Телефон:
-      input(id="phone_input" name="phone" type="text" v-model="form.phone" @keyup="validatePhone" required)
+      input(id="phone_input" name="phone" type="text" v-model="client.phone" @keyup="validatePhone" required)
       label(style="color:red;") {{ phone_validation_error }}
       br
 
       label(for="password_input") Пароль:
-      input(id="password_input" name="password" type="password" v-model="form.password" required)
+      input(id="password_input" name="password" type="password" v-model="client.password" required)
       br
 
-      input(type="button" value="Добавить клиента" @click="$emit('form-submitted', form)")
+      input(type="button" value="Добавить клиента" :disabled='!isFormComplete' @click="$emit('form-submitted', client)")
 </template>
 
 <script>
@@ -31,7 +31,7 @@
     props: ['clients'],
     data() {
       return {
-        form: {
+        client: {
           name: '',
           phone: '',
           email: '',
@@ -42,25 +42,31 @@
         phone_validation_error: ''
       }
     },
+    computed: {
+      isFormComplete () {
+        return this.name_validation_error === '' && this.email_validation_error === '' && this.phone_validation_error === ''
+          && this.client.name && this.client.phone && this.client.email && this.client.password
+      }
+    },
     methods: {
       validateName() {
-        if (this.form.name == '') {
+        if (this.client.name == '') {
           this.name_validation_error = "Name must be filled out";
         } else {
           this.name_validation_error = '';
         }
       },
       validateEmail() {
-        var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (!pattern.test(this.form.email)) {
+        let pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!pattern.test(this.client.email)) {
           this.email_validation_error = "Email format is invalid";
         } else {
           this.email_validation_error = '';
         }
       },
       validatePhone() {
-        var pattern = /^\d+$/;
-        if (!pattern.test(this.form.phone)) {
+        let pattern = /^\d+$/;
+        if (!pattern.test(this.client.phone)) {
           this.phone_validation_error = "Phone should contain numbers only";
         } else {
           this.phone_validation_error = '';
