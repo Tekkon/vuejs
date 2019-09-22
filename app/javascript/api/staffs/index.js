@@ -12,12 +12,19 @@ const adapter = axios.create({
 
 const api = {
   staffs: {
-    current: () => adapter.get('current'),
-    signOut: () => adapter.delete('sign_out')
+    current: () => adapter.get('current')
   },
   clients: {
     index: () => adapter.get('clients'),
-    create: (data, staff) => adapter.post('clients', data)
+    create: (data) => adapter.post('clients', data)
+  },
+  organizations: {
+    index: () => adapter.get('organizations'),
+    create: (data) => adapter.post('organizations', data),
+    delete: (data) => adapter.delete('organizations/' + data.id)
+  },
+  organization_types: {
+    index: () => adapter.get('organization_types')
   }
 }
 

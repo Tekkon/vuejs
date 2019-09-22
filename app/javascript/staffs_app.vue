@@ -1,12 +1,16 @@
 <template lang="pug">
-  div(v-if="loading")
-    p Загрузка...
-  div(v-else)
-    div(v-if="error")
-      p Ошибка
-    div(v-else)
-      nav-bar(:email="staff.email" @sign-out="signOut")
-      dashboard(:clients="clients" @form-submitted="createClient")
+  q-layout(view="hHh lpR fFf")
+    q-page-container
+      q-page
+        div(v-if="loading" class="fixed-center")
+          q-spinner(color="primary" size="3em" :thickness="10" align="center")
+        div(v-else)
+          div(v-if="error")
+            p Ошибка
+          div(v-else)
+            nav-bar(:email="staff.email")
+            dashboard(:clients="clients" :organizations="organizations" :organization_types="organization_types" @client-form-submitted="createClient"
+              @org-form-submitted="createOrganization" @org-delete-row="deleteOrganization")
 </template>
 
 <script>
@@ -20,12 +24,16 @@
         error: false,
         staff: {},
         title: '',
-        clients: []
+        clients: [],
+        organizations: [],
+        organization_types: []
       }
     },
     created() {
       this.getCurrentStaff();
       this.getClients();
+      this.getOrganizationTypes();
+      this.getOrganizations();
     },
     methods: {
       getCurrentStaff() {
@@ -41,14 +49,35 @@
           .finally(() => this.loading = false)
       },
       createClient(data) {
-        this.$api.clients.create(data, this.staff)
+        this.$api.clients.create(data)
           .then((response) => this.clients.push(response.data))
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
-      signOut() {
-        this.$api.staffs.signOut()
-          .then()
+      getOrganizations() {
+        this.$api.organizations.index()
+          .then((response) => this.organizations = response.data)
+          .catch(() => this.error = true)
+          .finally(() => this.loading = false)
+      },
+      createOrganization(data) {
+        this.$api.organizations.create(data)
+          .then((response) => this.organizations.push(response.data))
+          .catch(() => this.error = true)
+          .finally(() => this.loading = false)
+      },
+      deleteOrganization(data) {
+        this.$api.organizations.delete(data[0])
+          .then((response) => {
+            let index = this.organizations.map(x => { return x.id; }).indexOf(data[0].id);
+            this.organizations.splice(index, 1);
+          })
+          .catch((err) => { this.error = true; alert(err.message); })
+          .finally(() => this.loading = false)
+      },
+      getOrganizationTypes() {
+        this.$api.organization_types.index()
+          .then((response) => this.organization_types = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       }

@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     get 'current', to: 'staffs/staffs#current', as: :staffs_current
     get 'clients', to: 'staffs/clients#index'
     post 'clients', to: 'staffs/clients#create'
+
+    get 'organizations', to: 'staffs/organizations#index'
+    post 'organizations', to: 'staffs/organizations#create'
+    delete 'organizations/:id', to: 'staffs/organizations#destroy'
+
+    get 'organization_types', to: 'staffs/organization_types#index'
   end
 
   scope :clients do

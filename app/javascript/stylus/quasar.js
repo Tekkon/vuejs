@@ -10,7 +10,14 @@ import {
   QHeader,
   QDrawer,
   QPageContainer,
-  QPage
+  QPage,
+  QSpinner,
+  QToolbar,
+  QTable,
+  QForm,
+  QInput,
+  QBtn,
+  QSelect
 } from 'quasar'
 
 Vue.use(Quasar, {
@@ -20,7 +27,14 @@ Vue.use(Quasar, {
     QHeader,
     QDrawer,
     QPageContainer,
-    QPage
+    QPage,
+    QSpinner,
+    QToolbar,
+    QTable,
+    QForm,
+    QInput,
+    QBtn,
+    QSelect
   },
   directives: {
   },
