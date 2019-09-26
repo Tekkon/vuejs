@@ -1,7 +1,7 @@
 <template lang="pug">
   div(class="q-pa-md")
     p Клиенты:
-    div(v-for="client in clients" v-bind:key="client.id")
+    div(v-for="client in clients" :key="client.id")
       p {{ client.name }}, {{ client.email }}, {{ client.phone }}
 
     form(name="client_form")

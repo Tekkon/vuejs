@@ -33,8 +33,8 @@
       }
     },
     methods: {
-      optionSelected(data) {
-        this.organization.organization_type_id = data.value;
+      optionSelected({ value }) {
+        this.organization.organization_type_id = value;
       }
     }
   }

@@ -1,12 +1,12 @@
 <template lang="pug">
-  div(class="q-pa-md")
+  div.q-pa-md
     organization-form(:organization_types="organization_types" @org-form-submitted="orgFormSubmitted")
     organization-table(:organizations="organizations" :organization_types="organization_types" @org-delete-row="orgDeleteRow")
 </template>
 
 <script>
-  import OrganizationForm from 'staff_components/dashboard/organization_form.vue'
-  import OrganizationTable from 'staff_components/dashboard/organization_table.vue'
+  import OrganizationForm from 'staff_components/dashboard/organizationForm.vue'
+  import OrganizationTable from 'staff_components/dashboard/organizationTable.vue'
 
   export default {
     props: ['clients', 'organizations', 'organization_types'],
