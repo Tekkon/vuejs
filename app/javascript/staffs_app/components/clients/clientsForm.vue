@@ -1,31 +1,19 @@
 <template lang="pug">
-  div(class="q-pa-md")
-    p Клиенты:
-    div(v-for="client in clients" :key="client.id")
-      p {{ client.name }}, {{ client.email }}, {{ client.phone }}
+  .q-pa-md
+    q-form(name="clients_form" class="q-gutter-md")
+      q-input(filled v-model="client.name" label="Имя *" lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Имя не должно быть пустым']")
 
-    form(name="client_form")
-      .row
-        label(for="name_input") Имя:
-        input(id="name_input" name="name" type="text" v-model="client.name" @keyup="validateName" required)
-        label(style="color:red;") {{ name_validation_error }}
+      q-input(filled v-model="client.email" label="Email *" lazy-rules
+        :rules="[ val => val && /^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/.test(val) || 'Email должен быть в формате: email@somewhere.com']")
 
-      .row
-        label(for="name_input") Email:
-        input(id="email_input" name="email" type="text" v-model="client.email" @keyup="validateEmail" required)
-        label(style="color:red;") {{ email_validation_error }}
+      q-input(filled v-model="client.phone" label="Номер телефона *" lazy-rules
+        :rules="[ val => val && /^\\d+$/.test(val) || 'Номер телефона должен содержать только цифры']")
 
-      .row
-        label(for="phone_input") Телефон:
-        input(id="phone_input" name="phone" type="text" v-model="client.phone" @keyup="validatePhone" required)
-        label(style="color:red;") {{ phone_validation_error }}
+      q-input(filled v-model="client.password" label="Пароль *" lazy-rules
+        :rules="[ val => val && val.length >= 8 || 'Пароль не должен быть короче 8 символов']")
 
-      .row
-        label(for="password_input") Пароль:
-        input(id="password_input" name="password" type="password" v-model="client.password" required)
-
-      .row
-        input(type="button" value="Добавить клиента" :disabled='!isClientFormComplete' @click="$emit('client-form-submitted', client)")
+      q-btn(label="Добавить клиента" type="button" color="primary" @click="$emit('client-form-submitted', organization)" :disabled='!isClientFormComplete')
 </template>
 
 <script>

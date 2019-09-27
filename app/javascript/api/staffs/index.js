@@ -16,12 +16,13 @@ const api = {
   },
   clients: {
     index: () => adapter.get('clients'),
-    create: (data) => adapter.post('clients', data)
+    create: (data) => adapter.post('clients', data),
+    delete: (data) => adapter.delete(`clients/${data.id}`, data),
   },
   organizations: {
     index: () => adapter.get('organizations'),
     create: (data) => adapter.post('organizations', data),
-    delete: (data) => adapter.delete('organizations/' + data.id)
+    delete: (data) => adapter.delete(`organizations/${data.id}`)
   },
   organization_types: {
     index: () => adapter.get('organization_types')

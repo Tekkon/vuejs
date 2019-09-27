@@ -1,12 +1,12 @@
 <template lang="pug">
   div.q-pa-md
-    organization-form(:organization_types="organization_types" @org-form-submitted="orgFormSubmitted")
-    organization-table(:organizations="organizations" :organization_types="organization_types" @org-delete-row="orgDeleteRow")
+    organizations-form(:organization_types="organization_types" @org-form-submitted="orgFormSubmitted")
+    organizations-table(:organizations="organizations" :organization_types="organization_types" @org-delete-row="orgDeleteRow")
 </template>
 
 <script>
-  import OrganizationForm from 'staff_components/organizations/organizationForm.vue'
-  import OrganizationTable from 'staff_components/organizations/organizationTable.vue'
+  import OrganizationsForm from 'staff_components/organizations/organizationsForm.vue'
+  import OrganizationsTable from 'staff_components/organizations/organizationsTable.vue'
 
   export default {
     props: ['organizations', 'organization_types'],
@@ -38,8 +38,8 @@
       }
     },
     components: {
-      OrganizationForm,
-      OrganizationTable
+      OrganizationsForm,
+      OrganizationsTable
     }
   }
 </script>

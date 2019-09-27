@@ -9,6 +9,10 @@ class Staffs::ClientsController < Staffs::BaseController
     @client = Client.create(client_params)
   end
 
+  def destroy
+    Client.delete(params[:id])
+  end
+
   private
 
   def client_params
