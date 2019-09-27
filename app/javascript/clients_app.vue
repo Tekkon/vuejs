@@ -10,12 +10,11 @@
 
 <script>
   import NavBar from 'client_components/navbar.vue'
+  import loadingMixin from 'mixins/loading_mixin'
 
   export default {
     data () {
       return {
-        loading: true,
-        error: false,
         client: {},
         title: ''
       }
@@ -33,7 +32,8 @@
     },
     components: {
       NavBar
-    }
+    },
+    mixins: [loadingMixin]
   }
 </script>
 

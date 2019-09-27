@@ -8,6 +8,7 @@ module.exports = {
   resolve: {
     alias: {
       'images': resolve_path('assets/images'),
+      'mixins': resolve_path('mixins'),
       'client_components': resolve_path('clients_app/components'),
       'staff_components': resolve_path('staffs_app/components')
     }

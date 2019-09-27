@@ -12,10 +12,15 @@ Rails.application.routes.draw do
     resources :organizations, controller: 'staffs/organizations', only: %i[index create destroy]
 
     resources :organization_types, controller: 'staffs/organization_types', only: %i[index]
+
+    get '/*slug', to: 'staffs/landing#index'
   end
 
   scope :clients do
     root to: 'clients/landing#index', as: :clients_root
+
     get 'current', to: 'clients/clients#current', as: :clients_current
+
+    get '/*slug', to: 'clients/landing#index'
   end
 end

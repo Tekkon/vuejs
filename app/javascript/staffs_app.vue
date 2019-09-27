@@ -9,21 +9,24 @@
             p Ошибка
           div(v-else)
             nav-bar(:email="staff.email")
-            dashboard(:clients="clients" :organizations="organizations" :organization_types="organization_types" @client-form-submitted="createClient"
-              @org-form-submitted="createOrganization" @org-delete-row="deleteOrganization")
+
+            div
+              router-link(to="/staffs/clients-view") Клиенты
+
+            div
+              router-link(to="/staffs/organizations-view") Организации
+
+            router-view
 </template>
 
 <script>
   import NavBar from 'staff_components/navbar.vue'
-  import Dashboard from 'staff_components/dashboard.vue'
+  import loadingMixin from 'mixins/loading_mixin'
 
   export default {
     data () {
       return {
-        loading: true,
-        error: false,
         staff: {},
-        title: '',
         clients: [],
         organizations: [],
         organization_types: []
@@ -31,9 +34,6 @@
     },
     created() {
       this.getCurrentStaff();
-      this.getClients();
-      this.getOrganizationTypes();
-      this.getOrganizations();
     },
     methods: {
       getCurrentStaff() {
@@ -41,51 +41,12 @@
           .then((response) => this.staff = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
-      },
-      getClients() {
-        this.$api.clients.index()
-          .then((response) => this.clients = response.data)
-          .catch(() => this.error = true)
-          .finally(() => this.loading = false)
-      },
-      createClient(data) {
-        this.$api.clients.create(data)
-          .then((response) => this.clients.push(response.data))
-          .catch(() => this.error = true)
-          .finally(() => this.loading = false)
-      },
-      getOrganizations() {
-        this.$api.organizations.index()
-          .then((response) => this.organizations = response.data)
-          .catch(() => this.error = true)
-          .finally(() => this.loading = false)
-      },
-      createOrganization(data) {
-        this.$api.organizations.create(data)
-          .then((response) => this.organizations.push(response.data))
-          .catch(() => this.error = true)
-          .finally(() => this.loading = false)
-      },
-      deleteOrganization(data) {
-        this.$api.organizations.delete(data[0])
-          .then((response) => {
-            let index = this.organizations.map(x => { return x.id; }).indexOf(data[0].id);
-            this.organizations.splice(index, 1);
-          })
-          .catch((err) => { this.error = true; alert(err.message); })
-          .finally(() => this.loading = false)
-      },
-      getOrganizationTypes() {
-        this.$api.organization_types.index()
-          .then((response) => this.organization_types = response.data)
-          .catch(() => this.error = true)
-          .finally(() => this.loading = false)
       }
     },
     components: {
-      NavBar,
-      Dashboard
-    }
+      NavBar
+    },
+    mixins: [loadingMixin]
   }
 </script>
 
