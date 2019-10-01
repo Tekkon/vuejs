@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
     resources :clients, controller: 'staffs/clients', only: %i[index create destroy]
 
+    resources :staffs, controller: 'staffs/staffs', only: %i[index create destroy]
+
     resources :organizations, controller: 'staffs/organizations', only: %i[index create destroy]
 
     resources :organization_types, controller: 'staffs/organization_types', only: %i[index]

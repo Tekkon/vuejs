@@ -1,5 +1,5 @@
 <template lang="pug">
-  users-dashboard(:users="clients" title="Клиенты" @user-form-submitted="createClient" @user-delete-row="deleteClient")
+  users-dashboard(:users="staffs" title="Сотрудники" @user-form-submitted="createStaff" @user-delete-row="deleteStaff")
 </template>
 
 <script>
@@ -9,30 +9,30 @@
   export default {
     data () {
       return {
-        clients: []
+        staffs: []
       }
     },
     created() {
-      this.getClients();
+      this.getStaffs();
     },
     methods: {
-      getClients() {
-        this.$api.clients.index()
-          .then((response) => this.clients = response.data)
+      getStaffs() {
+        this.$api.staffs.index()
+          .then((response) => this.staffs = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
-      createClient(data) {
-        this.$api.clients.create(data)
-          .then((response) => this.clients.push(response.data))
+      createStaff(data) {
+        this.$api.staffs.create(data)
+          .then((response) => this.staffs.push(response.data))
           .catch(() => this.error = true)
           .finally(() => this.loading = false)
       },
-      deleteClient(data) {
-        this.$api.clients.delete(data[0])
+      deleteStaff(data) {
+        this.$api.staffs.delete(data[0])
           .then((response) => {
-            let index = this.clients.map(x => { return x.id; }).indexOf(data[0].id);
-            this.clients.splice(index, 1);
+            let index = this.staffs.map(x => { return x.id; }).indexOf(data[0].id);
+            this.staffs.splice(index, 1);
           })
           .catch((err) => { this.error = true; alert(err.message); })
           .finally(() => this.loading = false)

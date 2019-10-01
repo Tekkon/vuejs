@@ -14,6 +14,9 @@
               router-link(to="/staffs/clients-view") Клиенты
 
             div
+              router-link(to="/staffs/staffs-view") Сотрудники
+
+            div
               router-link(to="/staffs/organizations-view") Организации
 
             router-view
