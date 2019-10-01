@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :staffs, :controllers => { :sessions => "staffs/sessions" }, skip: [:registrations]
-  devise_for :clients, :controllers => { :sessions => "clients/sessions" }, skip: [:registrations]
+  devise_for :staffs, :controllers => { sessions: 'staffs/sessions' }, skip: [:registrations]
+  devise_for :clients, :controllers => { sessions: 'clients/sessions' }, skip: [:registrations]
 
   scope :staffs do
     root to: 'staffs/landing#index', as: :staffs_root
+
     get 'current', to: 'staffs/staffs#current', as: :staffs_current
-    get 'clients', to: 'staffs/clients#index'
-    post 'clients', to: 'staffs/clients#create'
+
+    resources :clients, controller: 'staffs/clients', only: %i[index create]
+
+    resources :organizations, controller: 'staffs/organizations', only: %i[index create destroy]
+
+    resources :organization_types, controller: 'staffs/organization_types', only: %i[index]
   end
 
   scope :clients do

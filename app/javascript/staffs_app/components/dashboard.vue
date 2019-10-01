@@ -1,56 +1,55 @@
 <template lang="pug">
-  div
-    div(v-for="client in clients" v-bind:key="client.id")
-      p {{ client.name }}, {{ client.email }}, {{ client.phone }}
-
-    form(name="client_form")
-      label(for="name_input") Имя:
-      input(id="name_input" name="name" type="text" v-model="client.name" @keyup="validateName" required)
-      label(style="color:red;") {{ name_validation_error }}
-      br
-
-      label(for="name_input") Email:
-      input(id="email_input" name="email" type="text" v-model="client.email" @keyup="validateEmail" required)
-      label(style="color:red;") {{ email_validation_error }}
-      br
-
-      label(for="phone_input") Телефон:
-      input(id="phone_input" name="phone" type="text" v-model="client.phone" @keyup="validatePhone" required)
-      label(style="color:red;") {{ phone_validation_error }}
-      br
-
-      label(for="password_input") Пароль:
-      input(id="password_input" name="password" type="password" v-model="client.password" required)
-      br
-
-      input(type="button" value="Добавить клиента" :disabled='!isFormComplete' @click="$emit('form-submitted', client)")
+  div.q-pa-md
+    organization-form(:organization_types="organization_types" @org-form-submitted="orgFormSubmitted")
+    organization-table(:organizations="organizations" :organization_types="organization_types" @org-delete-row="orgDeleteRow")
 </template>
 
 <script>
+  import OrganizationForm from 'staff_components/dashboard/organizationForm.vue'
+  import OrganizationTable from 'staff_components/dashboard/organizationTable.vue'
+
   export default {
-    props: ['clients'],
+    props: ['clients', 'organizations', 'organization_types'],
     data() {
       return {
+        selected: [],
         client: {
           name: '',
           phone: '',
           email: '',
           password: ''
         },
+        organization: {
+          title: '',
+          organization_type_id: '',
+          organization_type: '',
+          inn: '',
+          ogrn: ''
+        },
         name_validation_error: '',
         email_validation_error: '',
-        phone_validation_error: ''
+        phone_validation_error: '',
+        columns: [
+          { name: 'id', required: true, label: 'ID', align: 'left', field: row => row.id, sortable: true },
+          { name: 'title', align: 'left', label: 'Название', field: 'title', sortable: true },
+          { name: 'organization_type', label: 'Тип', field: 'organization_type_id', sortable: true },
+          { name: 'inn', label: 'ИНН', field: 'inn', sortable: true },
+          { name: 'ogrn', label: 'ОГРН', field: 'ogrn', sortable: true }
+        ]
       }
     },
     computed: {
-      isFormComplete () {
+      isClientFormComplete () {
         return this.name_validation_error === '' && this.email_validation_error === '' && this.phone_validation_error === ''
           && this.client.name && this.client.phone && this.client.email && this.client.password
+      },
+      isOrgFormComplete () {
+        return this.organization.title && this.organization.organization_type_id && this.organization.inn && this.organization.ogrn
       }
     },
     methods: {
       validateName() {
-        if (this.client.name == '') {
+        if (this.client.name === '') {
           this.name_validation_error = "Name must be filled out";
         } else {
           this.name_validation_error = '';
@@ -71,7 +70,24 @@
         } else {
           this.phone_validation_error = '';
         }
+      },
+      optionSelected(data) {
+        this.organization.organization_type_id = data.value;
+      },
+      onRowDelete() {
+        this.$emit('org-delete-row', this.selected);
+        this.selected = [];
+      },
+      orgFormSubmitted(data) {
+        this.$emit('org-form-submitted', data);
+      },
+      orgDeleteRow(data) {
+        this.$emit('org-delete-row', data);
       }
+    },
+    components: {
+      OrganizationForm,
+      OrganizationTable
     }
   }
 </script>
