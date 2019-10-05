@@ -4,7 +4,7 @@
 </template>
 
 <script>
-  import OrganizationsDashboard from 'staff_components/organizations/organizationsDashboard.vue'
+  import OrganizationsDashboard from 'staff_components/organizations/dashboard.vue'
   import loadingMixin from 'mixins/loading_mixin'
 
   export default {

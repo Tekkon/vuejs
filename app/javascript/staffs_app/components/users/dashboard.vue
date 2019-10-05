@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import UsersForm from 'staff_components/users/usersForm.vue'
-  import UsersTable from 'staff_components/users/usersTable.vue'
+  import UsersForm from 'staff_components/users/form.vue'
+  import UsersTable from 'staff_components/users/table.vue'
   import loadingMixin from 'mixins/loading_mixin'
 
   export default {

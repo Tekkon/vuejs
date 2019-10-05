@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import OrganizationsForm from 'staff_components/organizations/organizationsForm.vue'
-  import OrganizationsTable from 'staff_components/organizations/organizationsTable.vue'
+  import OrganizationsForm from 'staff_components/organizations/form.vue'
+  import OrganizationsTable from 'staff_components/organizations/table.vue'
 
   export default {
     props: ['organizations', 'organization_types'],

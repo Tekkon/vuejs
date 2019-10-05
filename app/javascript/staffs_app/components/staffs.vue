@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import UsersDashboard from 'staff_components/users/usersDashboard.vue'
+  import UsersDashboard from 'staff_components/users/dashboard.vue'
   import loadingMixin from 'mixins/loading_mixin'
 
   export default {
