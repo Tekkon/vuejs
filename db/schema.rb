@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_06_113827) do
+ActiveRecord::Schema.define(version: 2019_10_06_122105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -33,10 +33,16 @@ ActiveRecord::Schema.define(version: 2019_10_06_113827) do
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
 
+  create_table "clients_organizations", id: false, force: :cascade do |t|
+    t.bigint "client_id", null: false
+    t.bigint "organization_id", null: false
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string "name", null: false
     t.string "type", null: false
     t.string "serial_number", null: false
+    t.bigint "organization_id"
   end
 
   create_table "organization_types", force: :cascade do |t|
