@@ -1,6 +1,6 @@
 <p>Вам необходимо изменить пароль, чтобы продолжить!</p>
 
-<%= form_for(@staff, :url => { :action => "update" } ) do |f| %>
+<%= form_for(@staff, :url => { :action => "update" }, method: :patch ) do |f| %>
   <div class="field">
     <%= f.label :password, "Новый пароль" %><br />
     <%= f.password_field :password, :autocomplete => "off"  %>

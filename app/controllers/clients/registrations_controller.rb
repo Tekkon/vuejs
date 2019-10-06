@@ -1,14 +1,21 @@
-class Staffs::RegistrationsController < Devise::RegistrationsController
+class Staffs::RegistrationsController < Staffs::BaseController
   before_action :authenticate_client!
 
   def edit
     @client = current_client
-    super
   end
 
   def update
-    super
-    current_client.update(reset_password: false)
-    redirect_to clients_root_path
+    if update_password_params[:password] == update_password_params[:password_confirmation]
+      current_client.update(password: update_password_params[:password], reset_password: false)
+    else
+      redirect_to edit_client_registration_path
+    end
+  end
+
+  private
+
+  def update_password_params
+    params.require(:client).permit(:password, :password_confirmation)
   end
 end

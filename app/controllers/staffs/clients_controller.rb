@@ -7,6 +7,7 @@ class Staffs::ClientsController < Staffs::BaseController
 
   def create
     @client = Client.create(client_params)
+    @client.update(password: PasswordService.default)
   end
 
   def update

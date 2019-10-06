@@ -7,6 +7,7 @@ class Staffs::StaffsController < Staffs::BaseController
 
   def create
     @staff = Staff.create(staff_params)
+    @staff.update(password: PasswordService.default)
   end
 
   def update
