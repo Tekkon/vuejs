@@ -31,6 +31,11 @@ const api = {
   },
   organization_types: {
     index: () => adapter.get('organization_types')
+  },
+  clients_organizations: {
+    index: () => adapter.get('clients_organizations'),
+    create: (data) => adapter.post('clients_organizations', data),
+    delete: (data) => adapter.post('clients_organizations/destroy', data)
   }
 }
 

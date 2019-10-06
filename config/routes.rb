@@ -24,6 +24,10 @@ Rails.application.routes.draw do
 
     resources :organization_types, controller: 'staffs/organization_types', only: %i[index]
 
+    resources :clients_organizations, controller: 'staffs/clients_organizations', only: %i[index create]
+
+    post 'clients_organizations/destroy', to: 'staffs/clients_organizations#destroy', as: :staffs_clients_organizations_destroy
+
     get '/*slug', to: 'staffs/landing#index'
   end
 
