@@ -21,6 +21,6 @@ class Staffs::ClientsController < Staffs::BaseController
   private
 
   def client_params
-    params.permit(:name, :phone, :email)
+    params.permit(:name, :phone, :email, :reset_password)
   end
 end

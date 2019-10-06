@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   devise_for :staffs, :controllers => { sessions: 'staffs/sessions' }, skip: [:registrations]
+  as :staff do
+    get 'staffs/edit_password' => 'staffs/registrations#edit', :as => 'edit_staff_registration'
+    patch 'staffs/update_password' => 'staffs/registrations#update', :as => 'update_staff_registration'
+  end
+
   devise_for :clients, :controllers => { sessions: 'clients/sessions' }, skip: [:registrations]
+  as :client do
+    get 'clients/edit_password' => 'clients/registrations#edit', :as => 'edit_client_registration'
+    patch 'clients/update_password' => 'clients/registrations#update', :as => 'update_client_registration'
+  end
 
   scope :staffs do
     root to: 'staffs/landing#index', as: :staffs_root
