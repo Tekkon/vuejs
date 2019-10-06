@@ -7,9 +7,9 @@ Rails.application.routes.draw do
 
     get 'current', to: 'staffs/staffs#current', as: :staffs_current
 
-    resources :clients, controller: 'staffs/clients', only: %i[index create destroy]
+    resources :clients, controller: 'staffs/clients', only: %i[index create update destroy]
 
-    resources :staffs, controller: 'staffs/staffs', only: %i[index create destroy]
+    resources :staffs, controller: 'staffs/staffs', only: %i[index create update destroy]
 
     resources :organizations, controller: 'staffs/organizations', only: %i[index create destroy]
 

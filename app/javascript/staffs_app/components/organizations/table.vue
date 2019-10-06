@@ -3,7 +3,7 @@
     br
     q-table(title="Организации" :data="organizations" :columns="columns" row-key="id" selection="single" :selected.sync="selected")
       template(slot="top-selection" slot-scope="props")
-        q-btn(color="negative" flat round delete icon="delete" @click="onRowDelete")
+        q-btn(color="negative" flat round delete icon="delete" @click="onRowDelete" class="table-button")
 </template>
 
 <script>
@@ -29,3 +29,10 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .table-button {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+</style>

@@ -1,5 +1,12 @@
 <template lang="pug">
-  users-dashboard(:users="clients" title="Клиенты" @user-form-submitted="createClient" @user-delete-row="deleteClient")
+  users-dashboard(
+    :users="clients"
+    title="Клиенты"
+    edit_dialog_title="Редактировать клиента"
+    @user-form-submitted="createClient"
+    @user-delete-row="deleteClient"
+    @user-edit-form-submitted="updateClient"
+  )
 </template>
 
 <script>
@@ -26,6 +33,17 @@
         this.$api.clients.create(data)
           .then((response) => this.clients.push(response.data))
           .catch(() => this.error = true)
+          .finally(() => this.loading = false)
+      },
+      updateClient(data) {
+        this.$api.clients.update(data)
+          .then((response) => {
+            let index = this.clients.map(x => { return x.id; }).indexOf(response.data.id);
+            this.clients[index].name = response.data.name;
+            this.clients[index].email = response.data.email;
+            this.clients[index].phone = response.data.phone;
+          })
+          .catch((err) => { this.error = true; alert(err.message); })
           .finally(() => this.loading = false)
       },
       deleteClient(data) {

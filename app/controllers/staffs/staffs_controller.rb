@@ -2,11 +2,16 @@ class Staffs::StaffsController < Staffs::BaseController
   before_action :authenticate_staff!
 
   def index
-    @staffs = Staff.all
+    @staffs = Staff.all.order(:id)
   end
 
   def create
     @staff = Staff.create(staff_params)
+  end
+
+  def update
+    @staff = Staff.where(id: params[:id]).first
+    @staff.update(staff_params)
   end
 
   def destroy

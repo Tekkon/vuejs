@@ -18,7 +18,6 @@
 
 <script>
   export default {
-    props: ['users'],
     data() {
       return {
         user: {

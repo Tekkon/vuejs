@@ -3,16 +3,22 @@
     br
     q-table(:title="title" :data="users" :columns="columns" row-key="id" selection="single" :selected.sync="selected")
       template(slot="top-selection" slot-scope="props")
-        q-btn(color="negative" flat round delete icon="delete" @click="onRowDelete")
-        q-btn(color="positive" flat round edit icon="edit" @click="show_user_edit = true")
-    edit-dialog(:show_user_edit="show_user_edit" @popup-closed="show_user_edit = false")
+        q-btn(color="negative" flat round delete icon="Delete" @click="onRowDelete" class="table-button")
+        q-btn(color="positive" flat round edit icon="Edit" @click="show_user_edit = true" class="table-button")
+    edit-dialog(
+      :show_user_edit="show_user_edit"
+      :user="selected[0]"
+      :title="edit_dialog_title"
+      @user-edit-form-submitted="onUserEditFormSubmitted"
+      @edit-dialog-hide="onEditDialogHide"
+    )
 </template>
 
 <script>
   import EditDialog from 'staff_components/users/editDialog.vue'
 
   export default {
-    props: ['users', 'title'],
+    props: ['users', 'title', 'edit_dialog_title'],
     data() {
       return {
         selected: [],
@@ -29,6 +35,13 @@
       onRowDelete() {
         this.$emit('user-delete-row', this.selected);
         this.selected = [];
+      },
+      onUserEditFormSubmitted(data) {
+        this.show_user_edit = false;
+        this.$emit('user-edit-form-submitted', data)
+      },
+      onEditDialogHide() {
+        this.show_user_edit = false;
       }
     },
     components: {
@@ -36,3 +49,10 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .table-button {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+</style>
