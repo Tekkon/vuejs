@@ -1,6 +1,6 @@
 <template lang="pug">
   .q-pa-md
-    q-form(name="clients_organizations_form" class="q-gutter-md")
+    q-form(name="client_organizations_form" class="q-gutter-md")
       q-select(
         v-model="client_organization.client"
         :options="clients.map(client => ({ label: client.name, value: client.id }))"
@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    props: ['clients', 'organizations', 'clients_organizations'],
+    props: ['clients', 'organizations', 'client_organizations'],
     data() {
       return {
         client_organization: {

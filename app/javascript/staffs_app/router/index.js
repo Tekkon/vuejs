@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 import Clients from 'staff_components/clients.vue'
 import Staffs from 'staff_components/staffs.vue'
 import Organizations from 'staff_components/organizations.vue'
-import ClientsOrganizations from 'staff_components/clientsOrganizations.vue'
+import ClientOrganizations from 'staff_components/clientOrganizations.vue'
 
 export default new VueRouter({
   mode: 'history',
@@ -16,6 +16,6 @@ export default new VueRouter({
     { path: '/staffs/clients-view', component: Clients },
     { path: '/staffs/staffs-view', component: Staffs },
     { path: '/staffs/organizations-view', component: Organizations },
-    { path: '/staffs/clients-organizations-view', component: ClientsOrganizations }
+    { path: '/staffs/client-organizations-view', component: ClientOrganizations }
   ]
 })

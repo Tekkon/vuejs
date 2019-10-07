@@ -3,5 +3,5 @@ class Client < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable
 
-  has_and_belongs_to_many :organizations
+  has_many :organizations, through: :client_organizations
 end

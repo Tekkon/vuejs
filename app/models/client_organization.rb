@@ -1,3 +1,4 @@
 class ClientOrganization < ApplicationRecord
-  self.table_name = 'clients_organizations'
+  belongs_to :client
+  belongs_to :organization
 end

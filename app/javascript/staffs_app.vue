@@ -20,7 +20,7 @@
               router-link(to="/staffs/organizations-view") Организации
 
             div
-              router-link(to="/staffs/clients-organizations-view") Клиенты и организации
+              router-link(to="/staffs/client-organizations-view") Клиенты и организации
 
             router-view
 </template>

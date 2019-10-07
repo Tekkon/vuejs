@@ -29,15 +29,21 @@
     },
     computed: {
       computed_organizations() {
-        return this.organizations.map(x => {
-          return {
-            id: x.id,
-            title: x.title,
-            organization_type: this.organization_types[this.organization_types.map(x => { return x.id; }).indexOf(x.organization_type_id)].title,
-            inn: x.inn,
-            ogrn: x.ogrn
-          }
-        })
+        if (this.organizations && this.organization_types && this.organizations.length > 0 && this.organization_types.length > 0) {
+          return this.organizations.map(x => {
+            return {
+              id: x.id,
+              title: x.title,
+              organization_type: this.organization_types[this.organization_types.map(x => {
+                return x.id;
+              }).indexOf(x.organization_type_id)].title,
+              inn: x.inn,
+              ogrn: x.ogrn
+            }
+          })
+        } else {
+          return [];
+        }
       }
     }
   }
