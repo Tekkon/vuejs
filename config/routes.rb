@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
     resources :organizations, controller: 'staffs/organizations', only: %i[index create destroy]
 
+    resources :equipment, controller: 'staffs/equipment', only: %i[index create destroy]
+
     resources :organization_types, controller: 'staffs/organization_types', only: %i[index]
 
     resources :client_organizations, controller: 'staffs/client_organizations', only: %i[index create destroy]

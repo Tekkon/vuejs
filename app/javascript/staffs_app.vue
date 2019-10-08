@@ -22,6 +22,9 @@
             div
               router-link(to="/staffs/client-organizations-view") Клиенты и организации
 
+            div
+              router-link(to="/staffs/equipment-view") Оборудование
+
             router-view
 </template>
 
@@ -32,10 +35,7 @@
   export default {
     data () {
       return {
-        staff: {},
-        clients: [],
-        organizations: [],
-        organization_types: []
+        staff: {}
       }
     },
     created() {

@@ -29,6 +29,11 @@ const api = {
     create: (data) => adapter.post('organizations', data),
     delete: (data) => adapter.delete(`organizations/${data.id}`)
   },
+  equipment: {
+    index: () => adapter.get('equipment'),
+    create: (data) => adapter.post('equipment', data),
+    delete: (data) => adapter.delete(`equipment/${data.id}`)
+  },
   organization_types: {
     index: () => adapter.get('organization_types')
   },
