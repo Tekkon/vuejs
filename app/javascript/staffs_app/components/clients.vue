@@ -1,17 +1,20 @@
 <template lang="pug">
-  users-dashboard(
-    :users="clients"
-    title="Клиенты"
-    edit_dialog_title="Редактировать клиента"
-    @user-form-submitted="createClient"
-    @user-delete-row="deleteClient"
-    @user-edit-form-submitted="updateClient"
-  )
+  div
+    todo-filter
+    users-dashboard(
+      :users="clients"
+      title="Клиенты"
+      edit_dialog_title="Редактировать клиента"
+      @user-form-submitted="createClient"
+      @user-delete-row="deleteClient"
+      @user-edit-form-submitted="updateClient"
+    )
 </template>
 
 <script>
   import UsersDashboard from 'staff_components/users/dashboard.vue'
   import loadingMixin from 'mixins/loading_mixin'
+  import TodoFilter from 'staff_components/users/todoFilter.vue'
 
   export default {
     data () {
@@ -22,7 +25,20 @@
     created() {
       this.getClients();
     },
+    computed: {
+      filter() {
+        return this.$store.state.clients.filter
+      }
+    },
+    watch: {
+      filter() {
+        this.refresh()
+      }
+    },
     methods: {
+      refresh() {
+        this.$refs.clientsTable.requestServerInteraction()
+      },
       getClients() {
         this.$api.clients.index()
           .then((response) => this.clients = response.data)
@@ -57,7 +73,8 @@
       }
     },
     components: {
-      UsersDashboard
+      UsersDashboard,
+      TodoFilter
     },
     mixins: [loadingMixin]
   }

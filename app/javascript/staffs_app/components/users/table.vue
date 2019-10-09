@@ -1,7 +1,7 @@
 <template lang="pug">
   div(class="q-pa-md")
     br
-    q-table(:title="title" :data="users" :columns="columns" row-key="id" selection="single" :selected.sync="selected")
+    q-table(:title="title" :data="users" :columns="columns" row-key="id" selection="single" :selected.sync="selected" ref="clientsTable")
       template(slot="top-selection" slot-scope="props")
         q-btn(color="negative" flat round delete icon="Delete" @click="onRowDelete" class="table-button")
         q-btn(color="positive" flat round edit icon="Edit" @click="show_user_edit = true" class="table-button")
