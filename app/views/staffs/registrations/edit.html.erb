@@ -1,0 +1,15 @@
+<p>Вам необходимо изменить пароль, чтобы продолжить!</p>
+
+<%= form_for(@staff, :url => { :action => "update" }, method: :patch ) do |f| %>
+  <div class="field">
+    <%= f.label :password, "Новый пароль" %><br />
+    <%= f.password_field :password, :autocomplete => "off"  %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Подтвердите пароль" %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="action_container">
+    <%= f.submit "Отправить" %>
+  </div>
+<% end %>

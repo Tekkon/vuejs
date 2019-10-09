@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(class="q-pa-md")
+  .q-pa-md
     q-form(name="organization_form" class="q-gutter-md")
       q-input(filled v-model="organization.title" label="Название организации *" lazy-rules :rules="[ val => val && val.length > 0 || 'Поле не должно быть пустым']")
 

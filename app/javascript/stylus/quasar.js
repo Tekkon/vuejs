@@ -5,39 +5,52 @@ import iconSet from 'quasar/icon-set/fontawesome-v5.js'
 import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
 import 'quasar/dist/quasar.ie.polyfills'
 import {
+  ClosePopup,
   Quasar,
-  QLayout,
-  QHeader,
+  QBtn,
+  QCard,
+  QCheckbox,
+  QCardSection,
+  QCardActions,
   QDrawer,
+  QDialog,
+  QForm,
+  QHeader,
+  QInput,
+  QLayout,
   QPageContainer,
   QPage,
+  QSelect,
   QSpinner,
   QToolbar,
-  QTable,
-  QForm,
-  QInput,
-  QBtn,
-  QSelect
+  QTable
 } from 'quasar'
 
 Vue.use(Quasar, {
   config: {},
   components: {
-    QLayout,
-    QHeader,
+    ClosePopup,
+    QBtn,
+    QCard,
+    QCheckbox,
+    QCardSection,
+    QCardActions,
     QDrawer,
-    QPageContainer,
-    QPage,
-    QSpinner,
-    QToolbar,
-    QTable,
+    QDialog,
+    QHeader,
     QForm,
     QInput,
-    QBtn,
-    QSelect
+    QLayout,
+    QPageContainer,
+    QPage,
+    QSelect,
+    QSpinner,
+    QToolbar,
+    QTable
   },
-  directives: {
-  },
+  directives: [
+    ClosePopup
+  ],
   iconSet: iconSet,
   plugins: {
   }

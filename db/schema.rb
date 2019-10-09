@@ -10,11 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_110437) do
+ActiveRecord::Schema.define(version: 2019_10_08_152811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "client_organizations", force: :cascade do |t|
+    t.bigint "client_id"
+    t.bigint "organization_id"
+    t.index ["client_id", "organization_id"], name: "index_client_organizations_on_client_id_and_organization_id", unique: true
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,9 +33,17 @@ ActiveRecord::Schema.define(version: 2019_09_21_110437) do
     t.string "api_token", default: -> { "gen_random_uuid()" }
     t.string "name"
     t.string "phone"
+    t.boolean "reset_password"
     t.index ["api_token"], name: "index_clients_on_api_token", unique: true
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "type_name", null: false
+    t.string "serial_number", null: false
+    t.bigint "organization_id"
   end
 
   create_table "organization_types", force: :cascade do |t|
@@ -54,9 +68,13 @@ ActiveRecord::Schema.define(version: 2019_09_21_110437) do
     t.string "api_token", default: -> { "gen_random_uuid()" }
     t.string "name"
     t.string "phone"
+    t.boolean "reset_password"
     t.index ["api_token"], name: "index_staffs_on_api_token", unique: true
     t.index ["email"], name: "index_staffs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "client_organizations", "clients"
+  add_foreign_key "client_organizations", "organizations"
+  add_foreign_key "equipment", "organizations"
 end
