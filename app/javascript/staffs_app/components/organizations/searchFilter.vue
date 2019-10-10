@@ -2,7 +2,7 @@
   q-input(
     label="Поиск"
     v-model="filter"
-    debounce="300")
+    debounce="500")
 </template>
 
 <script>
@@ -10,10 +10,10 @@
     computed: {
       filter: {
         get() {
-          return this.$store.state.clients.filter
+          return this.$store.state.organizations.filter
         },
         set(value) {
-          this.$store.commit('updateFilter', value)
+          this.$store.commit('updateOrganizationsFilter', value)
         }
       }
     }
