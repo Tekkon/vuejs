@@ -1,12 +1,15 @@
 <template lang="pug">
   div.q-pa-md
     organizations-form(:organization_types="organization_types" @org-form-submitted="orgFormSubmitted")
+    br
+    search-filter
     organizations-table(:organizations="organizations" :organization_types="organization_types" @org-delete-row="orgDeleteRow")
 </template>
 
 <script>
   import OrganizationsForm from 'staff_components/organizations/form.vue'
   import OrganizationsTable from 'staff_components/organizations/table.vue'
+  import SearchFilter from 'staff_components/organizations/searchFilter.vue'
 
   export default {
     props: ['organizations', 'organization_types'],
@@ -25,7 +28,8 @@
     },
     components: {
       OrganizationsForm,
-      OrganizationsTable
+      OrganizationsTable,
+      SearchFilter
     }
   }
 </script>

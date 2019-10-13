@@ -1,6 +1,6 @@
 <template lang="pug">
   organizations-dashboard(:organizations="organizations" :organization_types="organization_types"
-    @org-form-submitted="createOrganization" @org-delete-row="deleteOrganization")
+    @org-form-submitted="createOrganization" @org-delete-row="deleteOrganization" ref="dashboard")
 </template>
 
 <script>
@@ -18,9 +18,19 @@
       this.getOrganizationTypes();
       this.getOrganizations();
     },
+    computed: {
+      organizationFilter() {
+        return this.$store.state.organizations.filter
+      }
+    },
+    watch: {
+      organizationFilter() {
+        this.getOrganizations()
+      }
+    },
     methods: {
       getOrganizations() {
-        this.$api.organizations.index()
+        this.$api.organizations.index(this.organizationFilter)
           .then((response) => this.organizations = response.data)
           .catch(() => this.error = true)
           .finally(() => this.loading = false)

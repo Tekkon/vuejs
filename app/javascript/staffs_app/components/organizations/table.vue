@@ -1,6 +1,5 @@
 <template lang="pug">
   div(class="q-pa-md")
-    br
     q-table(title="Организации" :data="computed_organizations" :columns="columns" row-key="id" selection="single" :selected.sync="selected")
       template(slot="top-selection" slot-scope="props")
         q-btn(color="negative" flat round delete icon="Delete" @click="onRowDelete" class="table-button")

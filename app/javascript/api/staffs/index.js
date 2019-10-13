@@ -25,7 +25,7 @@ const api = {
     delete: (data) => adapter.delete(`staffs/${data.id}`, data),
   },
   organizations: {
-    index: () => adapter.get('organizations'),
+    index: (data) => adapter.get(`organizations?filter=${data !== undefined ? data : ''}`),
     create: (data) => adapter.post('organizations', data),
     delete: (data) => adapter.delete(`organizations/${data.id}`)
   },

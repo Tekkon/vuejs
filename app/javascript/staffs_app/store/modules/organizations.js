@@ -3,7 +3,7 @@ export default {
     filter: ''
   },
   mutations: {
-    updateFilter(state, value) {
+    updateOrganizationsFilter(state, value) {
       state.filter = value
     }
   },

@@ -1,6 +1,5 @@
 <template lang="pug">
   div
-    todo-filter
     users-dashboard(
       :users="clients"
       title="Клиенты"
@@ -14,7 +13,6 @@
 <script>
   import UsersDashboard from 'staff_components/users/dashboard.vue'
   import loadingMixin from 'mixins/loading_mixin'
-  import TodoFilter from 'staff_components/users/todoFilter.vue'
 
   export default {
     data () {
@@ -25,20 +23,7 @@
     created() {
       this.getClients();
     },
-    computed: {
-      filter() {
-        return this.$store.state.clients.filter
-      }
-    },
-    watch: {
-      filter() {
-        this.refresh()
-      }
-    },
     methods: {
-      refresh() {
-        this.$refs.clientsTable.requestServerInteraction()
-      },
       getClients() {
         this.$api.clients.index()
           .then((response) => this.clients = response.data)
@@ -73,8 +58,7 @@
       }
     },
     components: {
-      UsersDashboard,
-      TodoFilter
+      UsersDashboard
     },
     mixins: [loadingMixin]
   }
