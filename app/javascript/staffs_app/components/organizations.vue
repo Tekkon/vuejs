@@ -60,7 +60,15 @@
     components: {
       OrganizationsDashboard
     },
-    mixins: [loadingMixin]
+    mixins: [loadingMixin],
+    subscriptions: {
+      OrganizationsChannel: {
+        received(data) {
+          console.log(data)
+          this.getOrganizations()
+        }
+      }
+    }
   }
 </script>
 

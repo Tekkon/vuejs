@@ -3,4 +3,10 @@ class Organization < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search, against: [:title, :inn, :ogrn]
+
+  after_save :broadcast
+
+  def broadcast
+    ActionCable.server.broadcast('organizations', { organization: self })
+  end
 end
