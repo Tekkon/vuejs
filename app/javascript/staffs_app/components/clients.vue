@@ -1,12 +1,13 @@
 <template lang="pug">
-  users-dashboard(
-    :users="clients"
-    title="Клиенты"
-    edit_dialog_title="Редактировать клиента"
-    @user-form-submitted="createClient"
-    @user-delete-row="deleteClient"
-    @user-edit-form-submitted="updateClient"
-  )
+  div
+    users-dashboard(
+      :users="clients"
+      title="Клиенты"
+      edit_dialog_title="Редактировать клиента"
+      @user-form-submitted="createClient"
+      @user-delete-row="deleteClient"
+      @user-edit-form-submitted="updateClient"
+    )
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 class Staffs::OrganizationsController < Staffs::BaseController
   def index
-    @organizations = Organization.all
+    @organizations = params[:filter].present? ? Organization.search(params[:filter]) : Organization.all
   end
 
   def create

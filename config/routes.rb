@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+
   devise_for :staffs, :controllers => { sessions: 'staffs/sessions' }, skip: [:registrations]
   as :staff do
     get 'staffs/edit_password' => 'staffs/registrations#edit', :as => 'edit_staff_registration'
